@@ -1,0 +1,26 @@
+.mealCard{
+    margin:20px;
+    margin-top: 50px; 
+}
+
+.mealCardTitle{
+    margin:0;
+}
+
+.dropdown-option{
+    
+    background-color: #ffff;
+    -webkit-transition: background-color .6s;
+    transition: background-color .6;
+}
+
+.dropdown-option:hover{
+    background-color: #565E64;
+    color:white;
+}
+
+body{
+    background-image: url(./images/background.jpg);
+    background-repeat: repeat;
+    background-size: contain;
+}

@@ -1,0 +1,684 @@
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        var menu = JSON.parse(xhttp.responseText);
+       console.log(menu.meals); //loggar det som ligger is meny-items.js
+
+        printMenu(menu.meals);
+    }
+};
+xhttp.open("GET", "object.json", true);
+xhttp.send();
+
+//Denna kod är det som tillåter dig att arbeta med det som ligger i JSON filen.
+//Alla funktioner som arbetar med de värden bör behöver ligga innuti scopet av if loopen.
+//Ceasarsalladen har två priser. En för en hel portion och en för en halv. Bra att komma ihåg vid sortering via pris.
+// Created by @conmarap.
+
+// Created by @conmarap.*/
+
+
+//allergier
+checkBox = document.getElementById('Laktos').addEventListener('click', event => {
+	if(event.target.checked) {
+		filterLactose();
+	}
+});
+
+checkBox = document.getElementById('Egg').addEventListener('click', event => {
+	if(event.target.checked) {
+		filterEgg();
+	}
+});
+
+checkBox = document.getElementById('Gluten').addEventListener('click', event => {
+	if(event.target.checked) {
+		filterGluten();
+	}
+});
+
+checkBox = document.getElementById('Skaldjur').addEventListener('click', event => {
+	if(event.target.checked) {
+		filterSeafood();
+	}
+});
+
+checkBox = document.getElementById('Notter').addEventListener('click', event => {
+	if(event.target.checked) {
+		alert("Checkbox checked!");
+	}
+});
+
+//protein
+
+checkBox = document.getElementById('Vegetariskt').addEventListener('click', event => {
+	if(event.target.checked) {
+		selectVegetarian();
+	}
+});
+
+checkBox = document.getElementById('Kyckling').addEventListener('click', event => {
+	if(event.target.checked) {
+		selectChicken();
+	}
+});
+
+checkBox = document.getElementById('Fisk').addEventListener('click', event => {
+	if(event.target.checked) {
+		selectFishSeafood();
+	}
+});
+
+checkBox = document.getElementById('Beef').addEventListener('click', event => {
+	if(event.target.checked) {
+		selectBeef();
+	}
+});
+
+checkBox = document.getElementById('Pork').addEventListener('click', event => {
+	if(event.target.checked) {
+		selectPork();
+	}
+});
+
+//pris
+
+checkBox = document.getElementById('lowtohigh').addEventListener('click', event => {
+	if(event.target.checked) {
+		SortAscending();
+	}
+});
+
+checkBox = document.getElementById('hightolow').addEventListener('click', event => {
+	if(event.target.checked) {
+		SortDescending();
+	}
+});
+
+
+
+//----------------------------------------------------------vv-PROTEINER-vv--------------------------------------------------------------------------//
+
+let OnOffSwitchForFishSeafood = false;
+function selectFishSeafood(){
+
+    const generalDivs = document.querySelectorAll('.mealCard');
+    //console.log(seaFoodDivs);
+
+    if (OnOffSwitchForFishSeafood === false) {
+
+        generalDivs.forEach((div) => {
+
+			const string = String(div.outerHTML);
+            const fishseafoodClass = string.search('fish/seafood');
+
+				if (fishseafoodClass === -1){//if seafood not found, do this
+		
+				//if seafood isn't found, lock it/lock everything with the exception of seafood./ no seafood found; placing generallocked.
+				div.classList.add("generallocked");
+				console.log(div);
+				div.style.display = "none";
+			}
+            //console.log(div);
+			//with toggle, all the divs get locked
+			//could then put if here that reverts generallocked and display:none on divs with 'seafood' class
+
+        })
+
+        OnOffSwitchForFishSeafood = true;
+    }
+    else {
+
+        generalDivs.forEach((div) => {
+            
+			const string = String(div.outerHTML);
+            const fishseafoodClass = string.search('fish/seafood');
+
+				if (fishseafoodClass === -1){//if seafood not found, do this
+		
+				//numbers
+				div.classList.remove("generallocked");//should exclude seafood when adding
+				//-1
+				console.log(div);
+				checkIfLockedAndReturnDisplay(div);//and display if it's not locked by anything else
+
+			}
+				//if locked is found in any of the "div":s, keep display:none; else, display:block
+				//returnDisplay(div);
+            
+        })
+
+        OnOffSwitchForFishSeafood = false;
+
+    }
+
+}
+
+let OnOffSwitchForBeef = false;
+function selectBeef(){
+
+    const generalDivs = document.querySelectorAll('.mealCard');
+    //console.log(seaFoodDivs);
+
+    if (OnOffSwitchForBeef === false) {
+
+        generalDivs.forEach((div) => {
+
+			const string = String(div.outerHTML);
+            const beefClass = string.search('beef');
+
+				if (beefClass === -1){//if seafood not found, do this
+		
+				//if seafood isn't found, lock it/lock everything with the exception of seafood./ no seafood found; placing generallocked.
+				div.classList.add("generallocked");
+				console.log(div);
+				div.style.display = "none";
+			}
+            //console.log(div);
+			//with toggle, all the divs get locked
+			//could then put if here that reverts generallocked and display:none on divs with 'seafood' class
+
+        })
+
+        OnOffSwitchForBeef = true;
+    }
+    else {
+
+        generalDivs.forEach((div) => {
+            
+			const string = String(div.outerHTML);
+            const beefClass = string.search('beef');
+
+				if (beefClass === -1){//if seafood not found, do this
+		
+				//numbers
+				div.classList.remove("generallocked");//should exclude seafood when adding
+				//-1
+				console.log(div);
+				checkIfLockedAndReturnDisplay(div);//and display if it's not locked by anything else
+
+			}
+				//if locked is found in any of the "div":s, keep display:none; else, display:block
+				//returnDisplay(div);
+            
+        })
+
+        OnOffSwitchForBeef = false;
+
+    }
+
+}
+
+let OnOffSwitchForPork = false;
+function selectPork(){
+
+    const generalDivs = document.querySelectorAll('.mealCard');
+    //console.log(seaFoodDivs);
+
+    if (OnOffSwitchForPork === false) {
+
+        generalDivs.forEach((div) => {
+
+			const string = String(div.outerHTML);
+            const porkClass = string.search('pork');
+
+				if (porkClass === -1){//if seafood not found, do this
+		
+				//if seafood isn't found, lock it/lock everything with the exception of seafood./ no seafood found; placing generallocked.
+				div.classList.add("generallocked");
+				console.log(div);
+				div.style.display = "none";
+			}
+            //console.log(div);
+			//with toggle, all the divs get locked
+			//could then put if here that reverts generallocked and display:none on divs with 'seafood' class
+
+        })
+
+        OnOffSwitchForPork = true;
+    }
+    else {
+
+        generalDivs.forEach((div) => {
+            
+			const string = String(div.outerHTML);
+            const porkClass = string.search('pork');
+
+				if (porkClass === -1){//if seafood not found, do this
+		
+				//numbers
+				div.classList.remove("generallocked");//should exclude seafood when adding
+				//-1
+				console.log(div);
+				checkIfLockedAndReturnDisplay(div);//and display if it's not locked by anything else
+
+			}
+				//if locked is found in any of the "div":s, keep display:none; else, display:block
+				//returnDisplay(div);
+            
+        })
+
+        OnOffSwitchForPork = false;
+
+    }
+
+}
+
+let OnOffSwitchForChicken = false;
+function selectChicken(){
+
+    const generalDivs = document.querySelectorAll('.mealCard');
+    //console.log(seaFoodDivs);
+
+    if (OnOffSwitchForChicken === false) {
+
+        generalDivs.forEach((div) => {
+
+			const string = String(div.outerHTML);
+            const chickenClass = string.search('chicken');
+
+				if (chickenClass === -1){//if seafood not found, do this
+		
+				//if seafood isn't found, lock it/lock everything with the exception of seafood./ no seafood found; placing generallocked.
+				div.classList.add("generallocked");
+				console.log(div);
+				div.style.display = "none";
+			}
+            //console.log(div);
+			//with toggle, all the divs get locked
+			//could then put if here that reverts generallocked and display:none on divs with 'seafood' class
+
+        })
+
+        OnOffSwitchForChicken = true;
+    }
+    else {
+
+        generalDivs.forEach((div) => {
+            
+			const string = String(div.outerHTML);
+            const chickenClass = string.search('chicken');
+
+				if (chickenClass === -1){//if seafood not found, do this
+		
+				//numbers
+				div.classList.remove("generallocked");//should exclude seafood when adding
+				//-1
+				console.log(div);
+				checkIfLockedAndReturnDisplay(div);//and display if it's not locked by anything else
+
+			}
+				//if locked is found in any of the "div":s, keep display:none; else, display:block
+				//returnDisplay(div);
+            
+        })
+
+        OnOffSwitchForChicken = false;
+
+    }
+
+}
+
+let OnOffSwitchForVegetarian = false;
+function selectVegetarian(){
+
+    const generalDivs = document.querySelectorAll('.mealCard');
+    //console.log(seaFoodDivs);
+
+    if (OnOffSwitchForVegetarian === false) {
+
+        generalDivs.forEach((div) => {
+
+			const string = String(div.outerHTML);
+            const vegetarianClass = string.search('vegetarian');
+
+				if (vegetarianClass === -1){//if seafood not found, do this
+		
+				//if seafood isn't found, lock it/lock everything with the exception of seafood./ no seafood found; placing generallocked.
+				div.classList.add("generallocked");
+				console.log(div);
+				div.style.display = "none";
+			}
+            //console.log(div);
+			//with toggle, all the divs get locked
+			//could then put if here that reverts generallocked and display:none on divs with 'seafood' class
+
+        })
+
+        OnOffSwitchForVegetarian = true;
+    }
+    else {
+
+        generalDivs.forEach((div) => {
+            
+			const string = String(div.outerHTML);
+            const vegetarianClass = string.search('vegetarian');
+
+				if (vegetarianClass === -1){//if seafood not found, do this
+		
+				//numbers
+				div.classList.remove("generallocked");//should exclude seafood when adding
+				//-1
+				console.log(div);
+				checkIfLockedAndReturnDisplay(div);//and display if it's not locked by anything else
+
+			}
+				//if locked is found in any of the "div":s, keep display:none; else, display:block
+				//returnDisplay(div);
+            
+        })
+
+        OnOffSwitchForVegetarian = false;
+
+    }
+
+}
+
+//----------------------------------------------------------^^-PROTEINER-^^--------------------------------------------------------------------------//
+
+//-----------------------------------------------------vv-ALLERGIER-vv--------------------------------------------------------------------------//
+
+let OnOffSwitchForGluten = false;
+function filterGluten(){
+
+    const glutenDivs = document.querySelectorAll('.gluten');
+    //console.log(glutenDivs);
+
+
+    if (OnOffSwitchForGluten === false) {
+
+        glutenDivs.forEach((div) => {
+
+            div.classList.toggle("glutenlocked");
+            console.log(div);
+            div.style.display = "none";
+            //console.log(div);
+
+        })
+
+        OnOffSwitchForGluten = true;
+    }
+    else {
+
+        glutenDivs.forEach((div) => {
+            
+            //numbers
+            div.classList.toggle("glutenlocked");
+            //-1
+            console.log(div);
+            checkIfLockedAndReturnDisplay(div);
+            //if locked is found in any of the "div":s, keep display:none; else, display:block
+            //returnDisplay(div);
+            
+        })
+
+        OnOffSwitchForGluten = false;
+
+    }
+
+}
+
+let OnOffSwitchForLactose = false;
+function filterLactose(){
+
+    const lactoseDivs = document.querySelectorAll('.lactose');
+    //console.log(glutenDivs);
+
+
+    if (OnOffSwitchForLactose === false) {
+
+        lactoseDivs.forEach((div) => {
+
+            div.classList.toggle("lactoselocked");
+            console.log(div);
+            div.style.display = "none";
+            //console.log(div);
+
+        })
+
+        OnOffSwitchForLactose = true;
+    }
+    else {
+
+        lactoseDivs.forEach((div) => {
+            
+            //numbers
+            div.classList.toggle("lactoselocked");
+            //-1
+            console.log(div);
+            checkIfLockedAndReturnDisplay(div);
+            //if locked is found in any of the "div":s, keep display:none; else, display:block
+            //returnDisplay(div);
+            
+        })
+
+        OnOffSwitchForLactose = false;
+
+    }
+
+}
+
+let OnOffSwitchForEgg = false;
+function filterEgg(){
+
+    const eggDivs = document.querySelectorAll('.egg');
+    //console.log(glutenDivs);
+
+
+    if (OnOffSwitchForEgg === false) {
+
+        eggDivs.forEach((div) => {
+
+            div.classList.toggle("egglocked");
+            console.log(div);
+            div.style.display = "none";
+            //console.log(div);
+
+        })
+
+        OnOffSwitchForEgg = true;
+    }
+    else {
+
+        eggDivs.forEach((div) => {
+            
+            //numbers
+            div.classList.toggle("egglocked");
+            //-1
+            console.log(div);
+            checkIfLockedAndReturnDisplay(div);
+            //if locked is found in any of the "div":s, keep display:none; else, display:block
+            //returnDisplay(div);
+            
+        })
+
+        OnOffSwitchForEgg = false;
+
+    }
+
+}
+
+let OnOffSwitchForSeafood = false;
+function filterSeafood(){
+
+    const seafoodDivs = document.querySelectorAll('.seafood');
+    //console.log(glutenDivs);
+
+
+    if (OnOffSwitchForSeafood === false) {
+
+        seafoodDivs.forEach((div) => {
+
+            div.classList.toggle("seafoodlocked");
+            console.log(div);
+            div.style.display = "none";
+            //console.log(div);
+
+        })
+
+        OnOffSwitchForSeafood = true;
+    }
+    else {
+
+        seafoodDivs.forEach((div) => {
+            
+            //numbers
+            div.classList.toggle("seafoodlocked");
+            //-1
+            console.log(div);
+            checkIfLockedAndReturnDisplay(div);
+            //if locked is found in any of the "div":s, keep display:none; else, display:block
+            //returnDisplay(div);
+            
+        })
+
+        OnOffSwitchForSeafood = false;
+
+    }
+
+}
+
+//-----------------------------------------------------^^-ALLERGIER-^^--------------------------------------------------------------------------//
+
+
+//-----------------------------------------------------vv-Funktion för både allergier & proteiner-vv----------------------------------------------------------//
+
+function checkIfLockedAndReturnDisplay (div){//DENNA FUNKTION KALLAS AV DEM OVANFÖR (ALLERGIER & PROTEIN)
+
+    /*Look inside this div. Is there a substring called "locked" in it? If there isn't
+    such a substring, you'll return -1, meaning it's not locked--meaning it's free
+    to appear (display:block).*/
+
+            const string = String(div.outerHTML);
+            const locked = string.search('locked');
+
+            if (locked === -1){
+    return div.style.display = "block"}
+    
+}
+
+//-----------------------------------------------------^^-Funktion för både allergier & proteiner-^^------------------------------------------------------//
+
+
+
+//--------------------------------------------------------------vv-Simons saker under här-vv--------------------------------------------------------//
+
+
+
+function SortAscending(){
+        var xhttp = new XMLHttpRequest();
+        xhttp.open('GET', 'object.json')
+        xhttp.onload = function(){
+            var menu = JSON.parse(xhttp.responseText);
+
+                removeElementByClass("mealCard"); 
+
+                var menuSortedAscending = menu.meals.sort((a, b) => {
+                    return a.price - b.price;
+                });
+
+                printMenu(menuSortedAscending);
+
+
+        }
+        xhttp.send();
+        }
+
+function SortDescending(){
+        var xhttp = new XMLHttpRequest();
+        xhttp.open('GET', 'object.json')
+        xhttp.onload = function(){
+            var menu = JSON.parse(xhttp.responseText);
+
+                removeElementByClass("mealCard"); 
+
+                var menuSortedAscending = menu.meals.sort((a, b) => {// new array
+                    return b.price - a.price;
+                });
+
+                printMenu(menuSortedAscending);
+
+
+        }
+        xhttp.send();
+        }
+
+
+
+
+        function removeElementByClass(className)
+        {
+            const elements = document.getElementsByClassName(className);
+            while(elements.length > 0){
+                elements[0].parentNode.removeChild(elements[0]);
+            }
+        }
+
+
+
+        function printMenu(menu)
+        {         
+            for(var i = 0; i < menu.length; i++)
+            {
+
+                var menuContainer = document.getElementById("menu-container");
+                var mealCard = document.createElement("div");
+                mealCard.classList.add("mealCard");
+                mealCard.classList.add(menu[i].alergies[0],menu[i].alergies[1], menu[i].meatType);
+                menuContainer.appendChild(mealCard);
+
+                mealCard.innerHTML = 
+                `
+                <div class="card mb-3" style="max-width: 100%;">
+                <div class="row no-gutters">
+                  <div class="col-md-4">
+                    <img src="${menu[i].image}" class="card-img" alt="${menu[i].name}">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title">${menu[i].name}</h5>
+                      <p class="card-text">${menu[i].description}</p>
+                      <p class="card-text">${menu[i].price} kr</p>
+                    </div>
+                  </div>
+                </div>
+                </div>
+                `;
+
+            }
+        }
+
+/*var xhttp = new XMLHttpRequest();
+        xhttp.open('GET', generalCall())
+        xhttp.onload = function(){
+            
+			isThisWorking();
+
+        }
+        xhttp.send();
+
+		var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        var menu = JSON.parse(xhttp.responseText);
+       console.log(menu.meals); //Loggar objekten som ligger is object.json
+       var meals = menu.meals; //För att enkelt nå menyn genom meals.objekt
+
+		isThisWorking();
+
+    }
+};
+xhttp.open("GET", "object.json", true);
+xhttp.send();
+/*var testSorting = ElementsArray.sort((a, b) => {
+	return a - b;
+});
+
+
+
+/*ElementsArray.forEach((element) => {
+
+	console.log(element);
+
+})*/
+

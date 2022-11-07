@@ -1,0 +1,102 @@
+{
+    "meals":[
+        {
+            "name":"Fläskplanka",
+            "price":149,
+            "alergies": ["gluten", "lactose"],
+            "meatType":"pork",
+            "image":"./images/flaskplanka.jpg",
+            "description":"Duchesse mos, rödvinssky, bearnaise och stekta grönsaker"
+        },
+        {
+            "name":"Biff Rydberg",
+            "price":175,
+            "alergies":["gluten", "egg"],
+            "meatType":"beef",
+            "image":"./images/biffrydberg.jpg",
+            "description":"Duchesse mos, rödvinssky, bearnaise och stekta grönsaker"
+        },
+        {
+            "name":"Spicy Cheeseburger",
+            "price":155,
+            "alergies":["gluten", "lactose"],
+            "meatType":"beef",
+            "image":"./images/spicycheese.jpg",
+            "description":"180gram högrevsburgare med sallad, tomat, picklad rödlök, cheddarost med jalapeños och barbecuesås i briochebröd med pommes rökig ranch-aioli"
+        },
+        {
+            "name":"Halloumi Burgare",
+            "price":155,
+            "alergies":["gluten", "lactose"],
+            "meatType":"vegetarian",
+            "image":"./images/halloumiburgare.jpg",
+            "description":"Sallad, tomat, rödlök och guacamole i briochebröd med pommes och aioli"
+        },
+        {
+            "name":"Fish'n Chips",
+            "price":149,
+            "alergies":["gluten", "lactose"],
+            "meatType":"fish/seafood",
+            "image":"./images/fishnchips.jpg",
+            "description":"Beer-batter panerad torskrygg med dill-aioli, halstrad citron och pommes"
+        },
+        {
+            "name":"Husets Schnitzel",
+            "price":175,
+            "alergies":["lactose"],
+            "meatType":"pork",
+            "image":"./images/schnitzel.jpg",
+            "description":"200 gram välbankad schnitzel ”Borås största” med citron, kapris, anjovis, kryddsmör och rödvinssky serveras med stekt potatis"
+        },
+        {
+            "name":"Ceasarsallad (Hel Portion)",
+            "price":139,
+            "alergies":["gluten", "lactose"],
+            "meatType":"chicken",
+            "image":"./images/ceasarsallad.jpeg",
+            "description":"Varm kyckling, bacon, krutonger, parmesan samt caesardressing"
+        },
+        {
+            "name":"Ceasarsallad (Halv Portion)",
+            "price":85,
+            "alergies":["gluten", "lactose"],
+            "meatType":"chicken",
+            "image":"./images/ceasarsallad.jpeg",
+            "description":"Varm kyckling, bacon, krutonger, parmesan samt caesardressing"
+        },
+        {
+            "name":"Laxsallad med quinoa",
+            "price":159,
+            "alergies":["seafood"],
+            "meatType":"fish/seafood",
+            "image":"./images/laxsallad.jpg",
+            "description":"Ångkokta musslor i en krämig sås gjord på cava, toppas med cream fraiche och jalapeños, serveras med pommes och aioli."
+        },
+        {
+            "name":"Musslor àl cava (Hel Portion)",
+            "price":189,
+            "alergies":["lactose", "seafood"],
+            "meatType":"fish/seafood",
+            "image":"./images/musslor.jpg",
+            "description":"Ångkokta musslor i en krämig sås gjord på cava, toppas med cream fraiche och jalapeños, serveras med pommes och aioli"
+        },
+        {
+            "name":"Musslor àl cava(Halv Portion)",
+            "price":109,
+            "alergies":["lactose", "seafood"],
+            "meatType":"fish/seafood",
+            "image":"./images/musslor.jpg",
+            "description":"Ångkokta musslor i en krämig sås gjord på cava, toppas med cream fraiche och jalapeños, serveras med pommes och aioli"
+        },
+        {
+            "name":"Grillad oxfilé",
+            "price":259,
+            "alergies":["lactose"],
+            "meatType":"beef",
+           "image":"./images/oxfile.jpg",
+            "description":"200 gram oxfilé, rödvinssås, frästa grönsaker serveras med potatisgratäng(går att få med pommes och bearnaise) "
+        }
+    
+    
+    ]
+    }
