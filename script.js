@@ -1,8 +1,14 @@
+
+/*Jag har skrivit mina kommentarer i --> /* //Sanna */
+
+/*Koden här nedanför används för att komma åt JSON-objekten med all information från.jsondokumentet
+XMLHttpRequest avänds för att data ska kunna skickas mellan en server och webbsida.*/ 
+
 var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
         var menu = JSON.parse(xhttp.responseText);
-       console.log(menu.meals); //loggar det som ligger is meny-items.js
+       console.log(menu.meals); 
 
         printMenu(menu.meals);
     }
@@ -10,12 +16,15 @@ xhttp.onreadystatechange = function() {
 xhttp.open("GET", "object.json", true);
 xhttp.send();
 
-//funktion för submit knapp för prissortering
-
+/*När man klickar på knappen "1.Sortera" med id:T submit aktiveras denna funktionen. */
 document.getElementById('submit').onclick = function() {
     var radios = document.getElementsByName("prisKnapp");
     var selected = Array.from(radios).find(radio => radio.checked);
     console.log(selected.value);
+    /*Funktionen kontrollerar vilken knapp som är ikryssad genom att gå igenom alla knappar med namn "prisKnapp" med en if-sats
+     (i detta fall 2 stycken.) Knappen för att sortera med stigande prise thar fått värde angivet till 1. Därför
+     kommer  funktionen SortAscending() köras igång när den är iklickad. och är den inte det kommer SortDescending()
+     aktiveras och rätterna sorteras istället efter högsta-> lägstapris. )*/
     if(selected.value == 1){
         SortAscending();
     }
@@ -26,22 +35,24 @@ document.getElementById('submit').onclick = function() {
 
 const menuDiv = document.querySelector("#menu-container");
 
-//funktioner för allergier
+/*Här är funktionerna för att sortera ut de olika allergenerna och även längre ner i dokumentet proteinet*/
 
 let OnOffSwitchForGluten = false;
 function filterGluten(){
 
     const glutenDivs = document.querySelectorAll('.gluten');
-    
+    /*Alla rätter som innehåller gluten väljs*/
 
 
     if (OnOffSwitchForGluten === false) {
 
+        /*Foreach går igenom alla rätter och kontrollerar om de är innehåller gluten*/
         glutenDivs.forEach((div) => {
 
             div.classList.toggle("glutenlocked");
             console.log(div);
             div.style.display = "none";
+            /*Om rätten innehåller gluten döljs rätten med style.display= none*/
             
 
         })
@@ -49,7 +60,7 @@ function filterGluten(){
         OnOffSwitchForGluten = true;
     }
     else {
-
+        /*Annars visas rätten på menyn*/
         glutenDivs.forEach((div) => {
             
             
@@ -66,7 +77,7 @@ function filterGluten(){
     }
 }
 
-
+/*Funktionen körs närman bockar ur en vald allergen eller protein, då kommer rätterna som innehåller allergenen/proteinet visas igen*/ 
 function checkIfLockedAndReturnDisplay (div){
 
     
@@ -78,6 +89,7 @@ function checkIfLockedAndReturnDisplay (div){
     return div.style.display = "block"}
     
 }
+/*Kommenterar inte separat på alla allergener och val av protein då funktionerna är desamma som gluten som jag förklarat*/
 
 let OnOffSwitchForLactose = false;
 function filterLactose(){
@@ -447,8 +459,12 @@ function selectVegetarian(){
 
 
 
+P
 
-//filter för prissortering
+
+
+
+                                                               
 
 function SortAscending(){
         var xhttp = new XMLHttpRequest();
@@ -458,6 +474,7 @@ function SortAscending(){
 
             removeElementByClass("mealCard"); 
 
+                /*Sortering av rätterna och skriver ut dem i sorterad ordning från dyrare till billigare*/
             var menuSortedAscending = menu.meals.sort((a, b) => {
                     return a.price - b.price;
             });
@@ -470,13 +487,15 @@ function SortAscending(){
         }
 
 function SortDescending(){
+    /*Hämtar info om rätterna ifrån json-objekten */
         var xhttp = new XMLHttpRequest();
         xhttp.open('GET', 'object.json')
         xhttp.onload = function(){
             var menu = JSON.parse(xhttp.responseText);
-
+            /*Tar bort rätterna som nu ligger synliga på sidan */
             removeElementByClass("mealCard"); 
 
+            /*Sortering av rätterna och skriver ut dem i sorterad ordning från billigare till dyrare med funktionen printMenu*/
             var menuSortedAscending = menu.meals.sort((a, b) => {
                     return b.price - a.price;
                 });
@@ -490,17 +509,21 @@ function SortDescending(){
 
 
 
-
+        /*Funktion som tar bort divarna alltså rätterna som inte ska synas beroende på vilket val
+        användaren har gjort. T.ex när rätterna sorteras utefter pris används först den här funktionen för att ta bort alla
+        rätter från sidan till att börja med. */
+        
         function removeElementByClass(className)
         {
-            const elements = document.getElementsByClassName(className);
-            while(elements.length > 0){
+            const elements = document.getElementsByClassName(className); 
+            while(elements.length > 0){ 
                 elements[0].parentNode.removeChild(elements[0]);
             }
         }
 
-//funktion för att printa kort
 
+        /*Den här funktionen hämtar menyns innehåll från json-dokumentet och lägger till en ruta/div för varje rätt i menyn
+        (mealCard)*/
         function printMenu(menu)
         {         
             for(var i = 0; i < menu.length; i++)
